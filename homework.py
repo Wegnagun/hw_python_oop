@@ -44,9 +44,8 @@ class Training:
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        raise ChildProcessError(f'Класс {self.__class__.__name__} '
-                                f'должен реализовывать метод '
-                                f'get_spent_calories')
+        raise NotImplementedError(f'Класс {self.__class__.__name__} должен '
+                                  f'реализовывать метод get_spent_calories')
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
@@ -129,8 +128,7 @@ def read_package(workout: str, workout_data: List[int]) -> Training:
                                              'WLK': SportsWalking}
     if workout in sport_type:
         return sport_type[workout](*workout_data)
-    else:
-        raise KeyError
+    raise ValueError
 
 
 def main(train: Training) -> None:
